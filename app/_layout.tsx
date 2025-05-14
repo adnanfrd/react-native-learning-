@@ -19,7 +19,9 @@ type Task = {
 export default function App(): JSX.Element {
   const [task, setTask] = useState<string>('');
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [editIndex, setEditIndex] = useState<number | null>(null);
 
+  // Load tasks from AsyncStorage on mount
   useEffect(() => {
     const loadTasks = async () => {
       try {
@@ -35,16 +37,26 @@ export default function App(): JSX.Element {
     loadTasks();
   }, []);
 
+  // Save tasks to AsyncStorage on every change
   useEffect(() => {
     AsyncStorage.setItem('tasks', JSON.stringify(tasks));
   }, [tasks]);
 
-  const handleAddTask = () => {
-    if (task.trim()) {
+  // Add or Update task
+  const handleAddOrUpdate = () => {
+    if (!task.trim()) return;
+
+    if (editIndex !== null) {
+      const updated = [...tasks];
+      updated[editIndex] = { ...updated[editIndex], text: task };
+      setTasks(updated);
+      setEditIndex(null);
+    } else {
       const newTask: Task = { text: task.trim(), done: false };
       setTasks(prev => [...prev, newTask]);
-      setTask('');
     }
+
+    setTask('');
   };
 
   const toggleTask = (index: number) => {
@@ -57,6 +69,15 @@ export default function App(): JSX.Element {
   const deleteTask = (index: number) => {
     const filtered = tasks.filter((_, i) => i !== index);
     setTasks(filtered);
+    if (editIndex === index) {
+      setEditIndex(null);
+      setTask('');
+    }
+  };
+
+  const editTask = (index: number) => {
+    setTask(tasks[index].text);
+    setEditIndex(index);
   };
 
   return (
@@ -67,7 +88,7 @@ export default function App(): JSX.Element {
         resizeMode="contain"
       />
 
-      <Text style={styles.title}>To-Do List</Text>
+      <Text style={styles.title}>📋 To-Do List</Text>
 
       <View style={styles.inputContainer}>
         <TextInput
@@ -76,22 +97,22 @@ export default function App(): JSX.Element {
           value={task}
           onChangeText={setTask}
         />
-        <Button title="Add" onPress={handleAddTask} />
+        <Button
+          title={editIndex !== null ? 'Update ✏️' : 'Add 📌'}
+          onPress={handleAddOrUpdate}
+        />
       </View>
 
       <ScrollView style={styles.scroll}>
         {tasks.map((item, index) => (
-          <Pressable
+          <View
             key={index}
-            onPress={() => toggleTask(index)}
-            onLongPress={() => deleteTask(index)}
+            style={[
+              styles.taskItem,
+              item.done && { backgroundColor: '#D1FAE5' },
+            ]}
           >
-            <View
-              style={[
-                styles.taskItem,
-                item.done && { backgroundColor: '#D1FAE5' },
-              ]}
-            >
+            <Pressable style={{ flex: 1 }} onPress={() => toggleTask(index)}>
               <Text
                 style={[
                   styles.taskText,
@@ -103,8 +124,17 @@ export default function App(): JSX.Element {
               >
                 • {item.text}
               </Text>
+            </Pressable>
+
+            <View style={styles.iconContainer}>
+              <Pressable onPress={() => editTask(index)} style={styles.icon}>
+                <Text>✏️</Text>
+              </Pressable>
+              <Pressable onPress={() => deleteTask(index)} style={styles.icon}>
+                <Text>🗑️</Text>
+              </Pressable>
             </View>
-          </Pressable>
+          </View>
         ))}
       </ScrollView>
     </View>
@@ -151,9 +181,19 @@ const styles = StyleSheet.create({
     padding: 15,
     marginBottom: 10,
     borderRadius: 6,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   taskText: {
     fontSize: 16,
     color: '#111827',
+  },
+  iconContainer: {
+    flexDirection: 'row',
+    marginLeft: 10,
+  },
+  icon: {
+    marginLeft: 8,
+    padding: 4,
   },
 });
