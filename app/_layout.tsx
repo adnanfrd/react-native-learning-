@@ -39,10 +39,10 @@ const [tasks, setTasks] = useState<string[]>([]);
       </View>
       <ScrollView style={styles.scroll}>
         {tasks.map((item, index) => (
-          <>
-            <View key={index} style={styles.taskItem} />
+            <View key={index} style={styles.taskItem} >
             <Text style={styles.taskText}>• {item}</Text>
-          </>
+            </View>
+          
         ))}
       </ScrollView>
     </View>
