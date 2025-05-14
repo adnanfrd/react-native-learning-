@@ -21,7 +21,6 @@ export default function App(): JSX.Element {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [editIndex, setEditIndex] = useState<number | null>(null);
 
-  // Load tasks from AsyncStorage on mount
   useEffect(() => {
     const loadTasks = async () => {
       try {
@@ -37,12 +36,10 @@ export default function App(): JSX.Element {
     loadTasks();
   }, []);
 
-  // Save tasks to AsyncStorage on every change
   useEffect(() => {
     AsyncStorage.setItem('tasks', JSON.stringify(tasks));
   }, [tasks]);
 
-  // Add or Update task
   const handleAddOrUpdate = () => {
     if (!task.trim()) return;
 
