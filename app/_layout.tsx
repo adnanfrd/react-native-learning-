@@ -62,7 +62,7 @@ export default function App(): JSX.Element {
   return (
     <View style={styles.container}>
       <Image
-        source={require('./assets/banner.png')}
+        source={require('../assets/images/splash-icon.png')}
         style={styles.banner}
         resizeMode="contain"
       />
