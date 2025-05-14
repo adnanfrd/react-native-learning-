@@ -3,13 +3,14 @@ import {
   View,
   Text,
   TextInput,
-  Button,
   ScrollView,
   StyleSheet,
   Image,
   Pressable,
+  TouchableOpacity,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Icon from 'react-native-vector-icons/Feather';
 
 type Task = {
   text: string;
@@ -94,10 +95,13 @@ export default function App(): JSX.Element {
           value={task}
           onChangeText={setTask}
         />
-        <Button
-          title={editIndex !== null ? 'Update ✏️' : 'Add 📌'}
-          onPress={handleAddOrUpdate}
-        />
+        <TouchableOpacity style={styles.addButton} onPress={handleAddOrUpdate}>
+          <Icon
+            name={editIndex !== null ? 'check' : 'plus'}
+            size={22}
+            color="#fff"
+          />
+        </TouchableOpacity>
       </View>
 
       <ScrollView style={styles.scroll}>
@@ -125,10 +129,10 @@ export default function App(): JSX.Element {
 
             <View style={styles.iconContainer}>
               <Pressable onPress={() => editTask(index)} style={styles.icon}>
-                <Text>✏️</Text>
+                <Icon name="edit-2" size={20} color="#2563EB" />
               </Pressable>
               <Pressable onPress={() => deleteTask(index)} style={styles.icon}>
-                <Text>🗑️</Text>
+                <Icon name="trash-2" size={20} color="#DC2626" />
               </Pressable>
             </View>
           </View>
@@ -169,6 +173,13 @@ const styles = StyleSheet.create({
     marginRight: 10,
     borderRadius: 6,
     backgroundColor: '#FFF',
+  },
+  addButton: {
+    backgroundColor: '#2563EB',
+    padding: 10,
+    borderRadius: 6,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   scroll: {
     marginTop: 10,
