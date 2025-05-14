@@ -1,8 +1,13 @@
 import { useState } from 'react';
-import { View, Text, StyleSheet, Image, TextInput } from 'react-native';
+import { View, Text, StyleSheet, Image, TextInput, Button } from 'react-native';
 
 export default function RootLayout() {
-  const [task, setTask] =useState('');
+  const [task, setTask] = useState('');
+  const [tasks, setTasks] = useState([]);
+
+  const handleAddTask = () =>{
+
+  }
   return (
     <View style={styles.container}>
       <Image
@@ -18,7 +23,7 @@ export default function RootLayout() {
          value={task}
          onChangeText={setTask}
          />
-
+        <Button title="Add" onPress={handleAddTask} />
       </View>
     </View>
   );
