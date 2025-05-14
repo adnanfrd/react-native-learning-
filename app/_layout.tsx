@@ -5,6 +5,8 @@ export default function RootLayout() {
     <View style={styles.container}>
       <Image
       source={require('../assets/images/splash-icon.png')}
+      style={styles.banner}
+      resizeMode="contain"
       />
     </View>
   );
