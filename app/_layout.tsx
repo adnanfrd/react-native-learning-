@@ -1,6 +1,8 @@
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { useState } from 'react';
+import { View, Text, StyleSheet, Image, TextInput } from 'react-native';
 
 export default function RootLayout() {
+  const [task, setTask] =useState('');
   return (
     <View style={styles.container}>
       <Image
@@ -9,6 +11,15 @@ export default function RootLayout() {
       resizeMode="contain"
       />
       <Text style={styles.title}>To-Do List</Text>
+      <View style={styles.inputContainer}>
+         <TextInput
+         style={styles.input}
+         placeholder='Enter a task'
+         value={task}
+         onChangeText={setTask}
+         />
+
+      </View>
     </View>
   );
 }
