@@ -8,6 +8,7 @@ export default function RootLayout() {
       style={styles.banner}
       resizeMode="contain"
       />
+      <Text style={styles.title}>To-Do List</Text>
     </View>
   );
 }
