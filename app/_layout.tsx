@@ -1,23 +1,58 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 
 export default function RootLayout() {
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>Hi from layout page</Text>
+      <Image
+      source={require('../assets/images/splash-icon.png')}
+      />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,                
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f0f0f0',
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#F3F4F6',
   },
-  heading: {
-    fontSize: 24,
+  banner: {
+    width: '100%',
+    height: 100,
+    marginBottom: 10,
+  },
+  title: {
+    fontSize: 28,
     fontWeight: 'bold',
-    color: '#333',
+    marginVertical: 10,
+    textAlign: 'center',
+    color: '#111827',
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    marginBottom: 20,
+    alignItems: 'center',
+  },
+  input: {
+    flex: 1,
+    borderColor: '#D1D5DB',
+    borderWidth: 1,
+    padding: 10,
+    marginRight: 10,
+    borderRadius: 6,
+    backgroundColor: '#FFF',
+  },
+  scroll: {
+    marginTop: 10,
+  },
+  taskItem: {
+    backgroundColor: '#E5E7EB',
+    padding: 15,
+    marginBottom: 10,
+    borderRadius: 6,
+  },
+  taskText: {
+    fontSize: 16,
+    color: '#111827',
   },
 });
