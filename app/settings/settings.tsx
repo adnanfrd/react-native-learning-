@@ -11,7 +11,7 @@ const Settings = () => {
       <View style={styles.btn}>
               <Button
                 title="Go to TodoList"
-                onPress={() => router.push("/profile/Profile")}
+                onPress={() => router.push("/todolist/TodoList")}
               />
             </View>
     </View>
