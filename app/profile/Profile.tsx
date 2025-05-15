@@ -8,7 +8,7 @@ const Profile = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>👤 Profile Screen</Text>
-      <Text>Welcome to your profile! Here you can manage your account details.</Text>
+      <Text>Welcome to your profile!</Text>
       <View style={styles.btn}>
        <Button  title="Go to Settings" onPress={() => router.push('/settings/settings')} />
       </View>
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 16,
-    backgroundColor: '#fff',
+    backgroundColor: '#F3F4F6',
   },
   title: {
     fontSize: 22,

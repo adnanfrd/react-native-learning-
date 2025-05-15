@@ -5,7 +5,22 @@ export default function Layout() {
   return (
     <Tabs
       screenOptions={({ route }) => ({
-        tabBarShowLabel : false,
+        tabBarShowLabel: false,
+        tabBarActiveTintColor: '#4b0082', // Active icon color
+        tabBarInactiveTintColor: 'gray',  // Inactive icon color
+        tabBarStyle: {
+          backgroundColor: '#ffffff', // Change tab bar background color here
+          borderTopWidth: 0,          // Optional: remove top border
+          elevation: 10,              // Optional: Android shadow
+          shadowColor: '#000',        // Optional: iOS shadow
+        },
+        headerStyle: {
+          backgroundColor: '#4b0082', // Change header background color here
+        },
+        headerTintColor: '#ffffff',    // Title & icon color in header
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
         tabBarIcon: ({ focused, color, size }) => {
           let iconName: keyof typeof Ionicons.glyphMap = 'home';
 
@@ -21,8 +36,6 @@ export default function Layout() {
 
           return <Ionicons name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: '#4b0082',
-        tabBarInactiveTintColor: 'gray',
       })}
     >
       <Tabs.Screen name="index" options={{ title: 'Home' }} />
