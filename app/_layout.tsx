@@ -5,6 +5,7 @@ export default function Layout() {
   return (
     <Tabs
       screenOptions={({ route }) => ({
+        tabBarShowLabel : false,
         tabBarIcon: ({ focused, color, size }) => {
           let iconName: keyof typeof Ionicons.glyphMap = 'home';
 
@@ -24,10 +25,10 @@ export default function Layout() {
         tabBarInactiveTintColor: 'gray',
       })}
     >
-      <Tabs.Screen name="index" options={{ title: '' }} />
-      <Tabs.Screen name="profile/Profile" options={{ title: '' }} />
-      <Tabs.Screen name="settings/settings" options={{ title: '' }} />
-      <Tabs.Screen name="todolist/TodoList" options={{ title: '' }} />
+      <Tabs.Screen name="index" options={{ title: 'Home' }} />
+      <Tabs.Screen name="profile/Profile" options={{ title: 'Profile' }} />
+      <Tabs.Screen name="settings/settings" options={{ title: 'Settings' }} />
+      <Tabs.Screen name="todolist/TodoList" options={{ title: 'Todo List' }} />
     </Tabs>
   );
 }
