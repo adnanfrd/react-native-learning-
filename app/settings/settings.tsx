@@ -1,11 +1,19 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Button } from 'react-native';
 import React from 'react';
+import { useRouter } from 'expo-router';
 
 const Settings = () => {
+    const router = useRouter();
   return (
     <View style={styles.container}>
       <Text style={styles.title}>⚙️ Settings Screen</Text>
       <Text>Configure your preferences and app settings here.</Text>
+      <View style={styles.btn}>
+              <Button
+                title="Go to TodoList"
+                onPress={() => router.push("/profile/Profile")}
+              />
+            </View>
     </View>
   );
 };
@@ -25,4 +33,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 10,
   },
+   btn: {
+    padding: 10
+  }
 });
