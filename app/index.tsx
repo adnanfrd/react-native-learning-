@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>🏠 Welcome to Home</Text>
-      <Button title="Go to Profile" onPress={() => router.push('/todolist/TodoList')} />
+      <Button title="Go to Profile" onPress={() => router.push('/profile/Profile')} />
     </View>
   );
 }
